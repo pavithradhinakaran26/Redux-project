@@ -1,19 +1,33 @@
-import { put, takeLatest, call } from 'redux-saga/effects';
-import { LOGIN_REQUEST } from './loginTypes';
-import { loginSuccess, loginFailure } from './loginActions';
+// import { takeLatest, put, call } from 'redux-saga/effects';
+// import { loginSuccess } from '../redux/LoginSlice';
 
-function* loginWorker(action) {
-  try {
-    const response = yield call(fetch, 'https://jsonplaceholder.typicode.com/posts');
-    const data = yield response.json();
+// function loginApi(payload) {
+//   return fetch('https://jsonplaceholder.typicode.com/posts', {
+//     method: 'POST',
+//     headers: {
+//       'Content-Type': 'application/json',
+//     },
+//     body: JSON.stringify(payload),
+//   }).then(response => response.json());
+// }
 
-    // Assume success always
-    yield put(loginSuccess(data));
-  } catch (error) {
-    yield put(loginFailure('Login failed ❌'));
-  }
-}
+// function* handleLogin(action) {
+//   try {
+//     const response = yield call(loginApi, action.payload);
 
-export function* loginWatcher() {
-  yield takeLatest(LOGIN_REQUEST, loginWorker);
-}
+//     if (response) {
+//       yield put(loginSuccess()); 
+//     } else {
+//       alert('Invalid Credentials ❌');
+//     }
+//   } catch (error) {
+//     console.error('Login error:', error);
+//     alert('Login Failed 😓');
+//   }
+// }
+
+// function* LoginSaga() {
+//   yield takeLatest('login/loginRequest', handleLogin);
+// }
+
+// export default LoginSaga;

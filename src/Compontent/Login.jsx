@@ -1,97 +1,13 @@
-// import React, { useState } from 'react';
-
-// function Login() {
-//   const [showPassword, setShowPassword] = useState(false);
-//   const [username, setUsername] = useState('');
-//   const [password, setPassword] = useState('');
-//   const [validated, setValidated] = useState(false);
-
-//   const togglePassword = () => {
-//     setShowPassword(!showPassword);
-//   };
-
-//   const handleSubmit = (e) => {
-//     e.preventDefault();
-
-//     if (username.trim() === '' || password.trim() === '') {
-//       setValidated(true);
-//       return;
-//     }
-
-//     alert('Login Successful ✅');
-//     setValidated(false);
-//   };
-
-//   return (
-//     <div className="container d-flex justify-content-center align-items-center vh-100 bg-light">
-//       <div className="card p-4 shadow" style={{ maxWidth: '400px', width: '100%' }}>
-//         <h3 className="text-center mb-4">Login</h3>
-
-//         <form onSubmit={handleSubmit} noValidate>
-//           {/* Username */}
-//           <div className="mb-3">
-//             <div className="input-group">
-//               <span className="input-group-text">
-//                 <i className="bi bi-person-fill"></i>
-//               </span>
-//               <input
-//                 type="text"
-//                 className={`form-control ${validated && username.trim() === '' ? 'is-invalid' : ''}`}
-//                 placeholder="Enter Username"
-//                 value={username}
-//                 onChange={(e) => setUsername(e.target.value)}
-//               />
-//             </div>
-//             {validated && username.trim() === '' && (
-//               <div className="text-danger small text-start mt-1">Username is required</div>
-//             )}
-//           </div>
-
-//           {/* Password */}
-//           <div className="mb-3">
-//             <div className="input-group">
-//               <span className="input-group-text">
-//                 <i className="bi bi-lock-fill"></i>
-//               </span>
-//               <input
-//                 type={showPassword ? 'text' : 'password'}
-//                 className={`form-control ${validated && password.trim() === '' ? 'is-invalid' : ''}`}
-//                 placeholder="Enter Password"
-//                 value={password}
-//                 onChange={(e) => setPassword(e.target.value)}
-//               />
-//               <span className="input-group-text" style={{ cursor: 'pointer' }} onClick={togglePassword}>
-//                 <i className={`bi ${showPassword ? 'bi-eye-slash-fill' : 'bi-eye-fill'}`}></i>
-//               </span>
-//             </div>
-//             {validated && password.trim() === '' && (
-//               <div className="text-danger small text-start mt-1">Password is required</div>
-//             )}
-//           </div>
-
-//           {/* Submit Button */}
-//           <div className="d-grid">
-//             <button type="submit" className="btn btn-primary">
-//               Login
-//             </button>
-//           </div>
-//         </form>
-//       </div>
-//     </div>
-//   );
-// }
-// export default Login;
-
-
-
-
 import React, { useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { loginRequest } from '../redux/LoginSlice';
 
 function Login() {
   const [showPassword, setShowPassword] = useState(false);
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [validated, setValidated] = useState(false);
+  const dispatch = useDispatch();
 
   const togglePassword = () => {
     setShowPassword(!showPassword);
@@ -99,14 +15,18 @@ function Login() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    
+
     if (username.trim() === '' || password.trim() === '') {
       setValidated(true);
       return;
     }
 
-    alert('Login Successful ✅');
+    dispatch(loginRequest({ username, password }));
     setValidated(false);
+  
   };
+  
 
   return (
     <div className="container-fluid d-flex justify-content-center align-items-center min-vh-100 bg-light">
