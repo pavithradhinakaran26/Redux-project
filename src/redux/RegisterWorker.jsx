@@ -1,15 +1,18 @@
 import { put, takeLatest } from "redux-saga/effects";
-import { REGISTER_USER } from "../actions/userTypes";
-import { registerUserSuccess, registerUserFailure } from "../reducers/userSlice";
+import {
+  REGISTER_USER_REQUEST,
+} from "./UserType";
+import {
+  registerUserSuccess,
+  registerUserFailure,
+} from "./UserAction";
 
 function* RegisterSaga(action) {
   try {
     const response = yield fetch("https://jsonplaceholder.typicode.com/users", {
       method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(action.payload),
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(action.payload), 
     });
 
     const data = yield response.json();
@@ -20,5 +23,5 @@ function* RegisterSaga(action) {
 }
 
 export function* watchRegisterUser() {
-  yield takeLatest(REGISTER_USER, RegisterSaga);
+  yield takeLatest(REGISTER_USER_REQUEST, RegisterSaga);
 }

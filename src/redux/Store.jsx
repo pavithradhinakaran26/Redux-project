@@ -142,21 +142,54 @@
 // export default store;
 
 
+// import createSagaMiddleware from 'redux-saga';
+// import { configureStore } from '@reduxjs/toolkit';
+// import LoginReducer from '../redux/LoginSlice'; 
+// import { LoginWatcher as LoginSaga } from '../redux/LoginWorker';  
+// import { all } from 'redux-saga/effects';
+
+
+// const sagaMiddleware = createSagaMiddleware();
+
+// function* RootSaga() {
+//   yield all([LoginSaga()]);  
+// }
+
+// const Store = configureStore({
+//   reducer: {
+//     login: LoginReducer,
+//   },
+//   middleware: (getDefaultMiddleware) => 
+//     getDefaultMiddleware({ thunk: false }).concat(sagaMiddleware),
+// });
+
+// sagaMiddleware.run(RootSaga);
+
+// export default Store;
+
+
+// src/redux/Store.js
 import createSagaMiddleware from 'redux-saga';
 import { configureStore } from '@reduxjs/toolkit';
 import LoginReducer from '../redux/LoginSlice'; 
 import { LoginWatcher as LoginSaga } from '../redux/LoginWorker';  
+import { watchRegisterUser } from '../redux/RegisterWorker'; // ✅ Add this
 import { all } from 'redux-saga/effects';
 
 const sagaMiddleware = createSagaMiddleware();
 
+// ✅ Combine both sagas here
 function* RootSaga() {
-  yield all([LoginSaga()]);  
+  yield all([
+    LoginSaga(),
+    watchRegisterUser() // ✅ Add this line
+  ]);
 }
 
 const Store = configureStore({
   reducer: {
     login: LoginReducer,
+    user: require('./UserSlice').default, // ✅ or import directly at top
   },
   middleware: (getDefaultMiddleware) => 
     getDefaultMiddleware({ thunk: false }).concat(sagaMiddleware),
@@ -165,3 +198,4 @@ const Store = configureStore({
 sagaMiddleware.run(RootSaga);
 
 export default Store;
+

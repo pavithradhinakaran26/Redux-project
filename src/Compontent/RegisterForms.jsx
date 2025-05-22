@@ -2,10 +2,13 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap-icons/font/bootstrap-icons.css';
+import { useDispatch } from "react-redux";
+import { registerUserRequest } from "../redux/UserAction"; 
 
 const RegisterForm = () => {
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
+    
     name: "",
     password: "",
     gender: "",
@@ -23,18 +26,17 @@ const RegisterForm = () => {
     setFormData(prev => ({ ...prev, [name]: value }));
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    console.log("Form Data Submitted:", formData);
+ const dispatch = useDispatch();
 
-    setShowToast(true);
-
-   
-    setTimeout(() => {
-      setShowToast(false);
-      navigate("/TablePage");
-    }, 3000);
-  };
+const handleSubmit = (e) => {
+  e.preventDefault();
+  dispatch(registerUserRequest(formData)); 
+  setShowToast(true);
+  setTimeout(() => {
+    setShowToast(false);
+    navigate("/TablePage");
+  }, 3000);
+};
 
   return (
     <div
@@ -162,8 +164,7 @@ const RegisterForm = () => {
                 placeholder="City"
                 value={formData.city}
                 onChange={handleChange}
-                required
-              />
+                required />
             </div>
           </div>
 
@@ -179,8 +180,7 @@ const RegisterForm = () => {
                 name="state"
                 value={formData.state}
                 onChange={handleChange}
-                required
-              >
+                required >
                 <option value="">Select</option>
                 {states.map((state, idx) => (
                   <option key={idx} value={state}>
@@ -216,8 +216,7 @@ const RegisterForm = () => {
             fontWeight: "500",
             minWidth: "250px",
             maxWidth: "300px",
-          }}
-        >
+          }}>
           <div className="d-flex justify-content-between align-items-center">
             <span>
               <i className="bi bi-check-circle-fill me-2"></i>
@@ -225,8 +224,7 @@ const RegisterForm = () => {
             </span>
             <button
               onClick={() => setShowToast(false)}
-              className="btn btn-sm btn-close btn-close-white ms-3"
-            ></button>
+              className="btn btn-sm btn-close btn-close-white ms-3"></button>
           </div>
         </div>
       )}

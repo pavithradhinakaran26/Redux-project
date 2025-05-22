@@ -42,7 +42,7 @@ const loginSlice = createSlice({
   name: 'login',
   initialState: { isLoggedIn: false },
   reducers: {
-    loginRequest: () => {}, // just for Saga trigger
+    loginRequest: () => {}, 
     loginSuccess: (state) => {
       state.isLoggedIn = true;
     },
