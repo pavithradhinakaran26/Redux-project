@@ -6,5 +6,6 @@ export default function* RootSaga() {
   yield all([
     LoginWatcher(),
     RegisterWorker(),
+    
   ]);
 }

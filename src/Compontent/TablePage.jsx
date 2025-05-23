@@ -1,42 +1,23 @@
 import React from "react";
+import { useSelector } from "react-redux";
 import { FaEdit, FaTrash } from "react-icons/fa";
 import 'bootstrap/dist/css/bootstrap.min.css';
+import { useNavigate } from "react-router-dom";
 
 const TablePage = () => {
-  const users = [
-    {
-      name: "",
-      password: "",
-      city: "",
-      state: "",
-      gender: "",
-      dob: "",
-    },
-    {
-      name: "",
-      password: "",
-      city: "",
-      state: "",
-      gender: "",
-      dob: "",
-    },
-     {
-      name: "",
-      password: "",
-      city: "",
-      state: "",
-      gender: "",
-      dob: "",
-    },
-  ];
-
-  const handleEdit = (user) => {
-    alert(`Edit clicked for ${user.name}`);
+  const users = useSelector((state) => state.user.users); 
+ const navigate = useNavigate();
+  // const handleEdit = (user) => {
+  //   alert(`Edit clicked for ${user.name}`);
+  // };
+   const handleEdit = (user) => {
+    navigate("/RegisterForms", { state: { user } }); 
   };
 
   const handleDelete = (user) => {
     alert(`Delete clicked for ${user.name}`);
   };
+  
 
   return (
     <div className="container mt-5">
@@ -57,7 +38,7 @@ const TablePage = () => {
                 </tr>
               </thead>
               <tbody>
-                {users.length > 0 ? (
+                {users && users.length > 0 ? (
                   users.map((user, idx) => (
                     <tr key={idx}>
                       <td>{user.name}</td>

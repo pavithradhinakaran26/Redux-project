@@ -12,7 +12,7 @@ function* RegisterSaga(action) {
     const response = yield fetch("https://jsonplaceholder.typicode.com/users", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(action.payload), 
+      body: JSON.stringify(action.payload),
     });
 
     const data = yield response.json();
@@ -21,7 +21,6 @@ function* RegisterSaga(action) {
     yield put(registerUserFailure(error.message));
   }
 }
-
 export function* watchRegisterUser() {
   yield takeLatest(REGISTER_USER_REQUEST, RegisterSaga);
 }

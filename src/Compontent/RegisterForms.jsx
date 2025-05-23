@@ -5,6 +5,7 @@ import 'bootstrap-icons/font/bootstrap-icons.css';
 import { useDispatch } from "react-redux";
 import { registerUserRequest } from "../redux/UserAction"; 
 
+
 const RegisterForm = () => {
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
@@ -37,6 +38,7 @@ const handleSubmit = (e) => {
     navigate("/TablePage");
   }, 3000);
 };
+
 
   return (
     <div
