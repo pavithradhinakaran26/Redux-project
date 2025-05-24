@@ -43,12 +43,26 @@ const userReducer = (state = initialState, action) => {
         loading: true,
       };
 
-    case "REGISTER_USER_SUCCESS":
-      return {
-        ...state,
-        loading: false,
-        users: [...state.users, action.payload], // add new user
-      };
+   case "REGISTER_USER_SUCCESS":
+  const existingIndex = state.users.findIndex(user => user.name === action.payload.name);
+  if (existingIndex !== -1) {
+    // Update existing user
+    const updatedUsers = [...state.users];
+    updatedUsers[existingIndex] = action.payload;
+    return {
+      ...state,
+      loading: false,
+      users: updatedUsers,
+    };
+  } else {
+    // Add new user
+    return {
+      ...state,
+      loading: false,
+      users: [...state.users, action.payload],
+    };
+  }
+
 
     case "REGISTER_USER_FAILURE":
       return {
@@ -100,6 +114,12 @@ const userReducer = (state = initialState, action) => {
         loading: false,
         error: action.payload,
       };
+      case "CLEAR_SELECTED_USER":
+  return {
+    ...state,
+    selectedUser: null,
+  };
+
 
     default:
       return state;
