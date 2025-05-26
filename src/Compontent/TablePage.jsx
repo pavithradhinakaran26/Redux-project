@@ -176,6 +176,9 @@ import { FaEdit, FaTrash } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 
+
+
+
 const TablePage = () => {
   const users = useSelector((state) => state.user.users);
   const navigate = useNavigate();
@@ -187,6 +190,7 @@ const TablePage = () => {
   const handleDelete = (user) => {
     alert(`Delete clicked for ${user.name}`);
   };
+  
 
   return (
     <div className="container py-5">

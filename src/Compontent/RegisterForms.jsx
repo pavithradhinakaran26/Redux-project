@@ -266,7 +266,7 @@ const RegisterForm = () => {
 
   const states = ["Tamil Nadu", "Kerala", "Karnataka", "Andhra Pradesh", "Maharashtra"];
 
-  // Pre-fill form if editUser exists
+  
   useEffect(() => {
     if (editUser) {
       setFormData(editUser);
@@ -281,7 +281,7 @@ const RegisterForm = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    dispatch(registerUserRequest(formData)); // for both add/edit
+    dispatch(registerUserRequest(formData)); 
 
     setShowToast(true);
     setTimeout(() => {
@@ -479,4 +479,3 @@ const RegisterForm = () => {
 };
 
 export default RegisterForm;
-
