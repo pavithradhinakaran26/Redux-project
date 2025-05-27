@@ -182,14 +182,14 @@ const sagaMiddleware = createSagaMiddleware();
 function* RootSaga() {
   yield all([
     LoginSaga(),
-    watchRegisterUser() // ✅ Add this line
+    watchRegisterUser() 
   ]);
 }
 
 const Store = configureStore({
   reducer: {
     login: LoginReducer,
-    user: require('./UserSlice').default, // ✅ or import directly at top
+    user: require('./UserSlice').default, 
   },
   middleware: (getDefaultMiddleware) => 
     getDefaultMiddleware({ thunk: false }).concat(sagaMiddleware),

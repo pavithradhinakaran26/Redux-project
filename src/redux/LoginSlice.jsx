@@ -51,3 +51,4 @@ const loginSlice = createSlice({
 
 export const { loginRequest, loginSuccess } = loginSlice.actions;
 export default loginSlice.reducer;
+
