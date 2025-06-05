@@ -1,5 +1,3 @@
-
-
 import { createSlice } from '@reduxjs/toolkit';
 
 const LoginSlice = createSlice({
@@ -17,7 +15,6 @@ const LoginSlice = createSlice({
       state.password = action.payload;
     },
     loginRequest: (state, action) => {
-      // Saga will handle this; no state change here
     },
     loginSuccess: (state) => {
       state.isLoggedIn = true;
@@ -32,23 +29,3 @@ const LoginSlice = createSlice({
 
 export const { setUsername, setPassword, loginRequest, loginSuccess, logout } = LoginSlice.actions;
 export default LoginSlice.reducer;
-
-
-// import { createSlice } from '@reduxjs/toolkit';
-
-
-
-// const loginSlice = createSlice({
-//   name: 'login',
-//   initialState: { isLoggedIn: false },
-//   reducers: {
-//     loginRequest: () => {}, 
-//     loginSuccess: (state) => {
-//       state.isLoggedIn = true;
-//     },
-//   },
-// });
-
-// export const { loginRequest, loginSuccess } = loginSlice.actions;
-// export default loginSlice.reducer;
-

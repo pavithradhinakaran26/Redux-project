@@ -173,12 +173,12 @@ import createSagaMiddleware from 'redux-saga';
 import { configureStore } from '@reduxjs/toolkit';
 import LoginReducer from '../redux/LoginSlice'; 
 import { LoginWatcher as LoginSaga } from '../redux/LoginWorker';  
-import { watchRegisterUser } from '../redux/RegisterWorker'; // ✅ Add this
+import { watchRegisterUser } from '../redux/RegisterWorker'; 
 import { all } from 'redux-saga/effects';
 
 const sagaMiddleware = createSagaMiddleware();
 
-// ✅ Combine both sagas here
+
 function* RootSaga() {
   yield all([
     LoginSaga(),

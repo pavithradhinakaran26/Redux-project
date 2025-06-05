@@ -151,14 +151,12 @@ const TablePage = () => {
                         <div className="d-flex justify-content-center gap-2">
                           <button
                             className="btn btn-success btn-sm d-flex align-items-center gap-1"
-                            onClick={() => handleEdit(user)}
-                          >
+                            onClick={() => handleEdit(user)}>
                             <FaEdit /> Edit
                           </button>
                           <button
                             className="btn btn-danger btn-sm d-flex align-items-center gap-1"
-                            onClick={() => handleDelete(user)}
-                          >
+                            onClick={() => handleDelete(user)}>
                             <FaTrash /> Delete
                           </button>
                         </div>
